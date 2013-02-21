@@ -70,12 +70,12 @@ function mp_html_in_post_addon_textdomain() {
 
 
 	// Traditional WordPress plugin locale filter
-	$locale        = apply_filters( 'plugin_locale',  get_locale(), 'mp_html_in_post_addon' );
-	$mofile        = sprintf( '%1$s-%2$s.mo', 'mp_html_in_post_addon', $locale );
+	$locale        = apply_filters( 'plugin_locale',  get_locale(), 'mp-html-in-post_addon' );
+	$mofile        = sprintf( '%1$s-%2$s.mo', 'mp-html-in-post-addon', $locale );
 
 	// Setup paths to current locale file
 	$mofile_local  = $mp_html_in_post_addon_lang_dir . $mofile;
-	$mofile_global = WP_LANG_DIR . '/mp_html_in_post_addon/' . $mofile;
+	$mofile_global = WP_LANG_DIR . '/mp-html-in-post-addon/' . $mofile;
 
 	if ( file_exists( $mofile_global ) ) {
 		// Look in global /wp-content/languages/mp_html_in_post_addon folder
@@ -111,7 +111,7 @@ if (!function_exists('mp_core_textdomain')){
 	/**
 	 * Check if wp_core in installed
 	 */
-	include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp_core_check.php' );
+	include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-core-check.php' );
 	
 }
 /**
@@ -126,7 +126,7 @@ elseif(!function_exists('mp_html_in_post_textdomain')){
 	/**
 	 * Check if wp_html_in_post in installed
 	 */
-	include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp_html_in_post_check.php' );
+	include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-html-in-post-check.php' );
 }
 /**
  * Otherwise, if mp_core and mp_html_in_post are installed, carry out the plugin's functions
@@ -136,6 +136,6 @@ else{
 	/**
 	 * Modify Metabox for HTML repeater for posts
 	 */
-	require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/metaboxes/html_repeater_addon/html_repeater_addon.php' );
+	require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/metaboxes/html-repeater-addon/html-repeater-addon.php' );
 	
 }
