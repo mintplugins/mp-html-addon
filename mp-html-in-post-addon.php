@@ -97,45 +97,47 @@ add_action( 'init', 'mp_html_in_post_addon_textdomain', 1 );
 |--------------------------------------------------------------------------
 */
 
-
-/**
- * If mp_core isn't active, stop and install it now
- */
-if (!function_exists('mp_core_textdomain')){
-	
+function mp_html_in_post_addon_include_files(){
 	/**
-	 * Include Plugin Checker
+	 * If mp_core isn't active, stop and install it now
 	 */
-	require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
-	
-	/**
-	 * Check if wp_core in installed
-	 */
-	include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-core-check.php' );
-	
-}
-/**
- * If mp_core is active but mp_html_in_post isn't, stop and install it now
- */
-elseif(!function_exists('mp_html_in_post_textdomain')){
-	/**
-	 * Include Plugin Checker
-	 */
-	require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
-	
-	/**
-	 * Check if wp_html_in_post in installed
-	 */
-	include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-html-in-post-check.php' );
-}
-/**
- * Otherwise, if mp_core and mp_html_in_post are installed, carry out the plugin's functions
- */
-else{
+	if (!function_exists('mp_core_textdomain')){
 		
+		/**
+		 * Include Plugin Checker
+		 */
+		require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
+		
+		/**
+		 * Check if wp_core in installed
+		 */
+		include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-core-check.php' );
+		
+	}
 	/**
-	 * Modify Metabox for HTML repeater for posts
+	 * If mp_core is active but mp_html_in_post isn't, stop and install it now
 	 */
-	require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/metaboxes/html-repeater-addon/html-repeater-addon.php' );
-	
+	elseif(!function_exists('mp_html_in_post_textdomain')){
+		/**
+		 * Include Plugin Checker
+		 */
+		require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
+		
+		/**
+		 * Check if wp_html_in_post in installed
+		 */
+		include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-html-in-post-check.php' );
+	}
+	/**
+	 * Otherwise, if mp_core and mp_html_in_post are installed, carry out the plugin's functions
+	 */
+	else{
+			
+		/**
+		 * Modify Metabox for HTML repeater for posts
+		 */
+		require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/metaboxes/html-repeater-addon/html-repeater-addon.php' );
+		
+	}
 }
+add_action('plugins_loaded', 'mp_html_in_post_addon_include_files', 9);
