@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Move Plugins - HTML in Post Addon
+Plugin Name: MP HTML in Post Addon
 Plugin URI: http://moveplugins.com
 Description: Put HTML chunks in a post
 Version: 1.0
-Author: Phil Johnston
+Author: Move Plugins
 Author URI: http://moveplugins.com
-Text Domain: mp_html_in_post_addon
+Text Domain: mp_html_addon
 Domain Path: languages
 License: GPL2
 */
@@ -33,20 +33,20 @@ License: GPL2
 |--------------------------------------------------------------------------
 */
 // Plugin version
-if( !defined( 'MP_HTML_IN_POST_ADDON_VERSION' ) )
-	define( 'MP_HTML_IN_POST_ADDON_VERSION', '1.0.0.0' );
+if( !defined( 'MP_HTML_ADDON_VERSION' ) )
+	define( 'MP_HTML_ADDON_VERSION', '1.0.0.0' );
 
 // Plugin Folder URL
-if( !defined( 'MP_HTML_IN_POST_ADDON_PLUGIN_URL' ) )
-	define( 'MP_HTML_IN_POST_ADDON_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+if( !defined( 'MP_HTML_ADDON_PLUGIN_URL' ) )
+	define( 'MP_HTML_ADDON_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 // Plugin Folder Path
-if( !defined( 'MP_HTML_IN_POST_ADDON_PLUGIN_DIR' ) )
-	define( 'MP_HTML_IN_POST_ADDON_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+if( !defined( 'MP_HTML_ADDON_PLUGIN_DIR' ) )
+	define( 'MP_HTML_ADDON_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 // Plugin Root File
-if( !defined( 'MP_HTML_IN_POST_ADDON_PLUGIN_FILE' ) )
-	define( 'MP_HTML_IN_POST_ADDON_PLUGIN_FILE', __FILE__ );
+if( !defined( 'MP_HTML_ADDON_PLUGIN_FILE' ) )
+	define( 'MP_HTML_ADDON_PLUGIN_FILE', __FILE__ );
 
 /*
 |--------------------------------------------------------------------------
@@ -62,34 +62,34 @@ if( !defined( 'MP_HTML_IN_POST_ADDON_PLUGIN_FILE' ) )
 |--------------------------------------------------------------------------
 */
 
-function mp_html_in_post_addon_textdomain() {
+function mp_html_addon_textdomain() {
 
 	// Set filter for plugin's languages directory
-	$mp_html_in_post_addon_lang_dir = dirname( plugin_basename( MP_HTML_IN_POST_ADDON_PLUGIN_FILE ) ) . '/languages/';
-	$mp_html_in_post_addon_lang_dir = apply_filters( 'mp_html_in_post_addon_languages_directory', $mp_html_in_post_addon_lang_dir );
+	$mp_html_addon_lang_dir = dirname( plugin_basename( MP_HTML_ADDON_PLUGIN_FILE ) ) . '/languages/';
+	$mp_html_addon_lang_dir = apply_filters( 'mp_html_addon_languages_directory', $mp_html_addon_lang_dir );
 
 
 	// Traditional WordPress plugin locale filter
-	$locale        = apply_filters( 'plugin_locale',  get_locale(), 'mp-html-in-post_addon' );
-	$mofile        = sprintf( '%1$s-%2$s.mo', 'mp-html-in-post-addon', $locale );
+	$locale        = apply_filters( 'plugin_locale',  get_locale(), 'mp-html-addon' );
+	$mofile        = sprintf( '%1$s-%2$s.mo', 'mp-html-addon', $locale );
 
 	// Setup paths to current locale file
-	$mofile_local  = $mp_html_in_post_addon_lang_dir . $mofile;
-	$mofile_global = WP_LANG_DIR . '/mp-html-in-post-addon/' . $mofile;
+	$mofile_local  = $mp_html_addon_lang_dir . $mofile;
+	$mofile_global = WP_LANG_DIR . '/mp-html-addon/' . $mofile;
 
 	if ( file_exists( $mofile_global ) ) {
-		// Look in global /wp-content/languages/mp_html_in_post_addon folder
-		load_textdomain( 'mp_html_in_post_addon', $mofile_global );
+		// Look in global /wp-content/languages/mp_html_addon folder
+		load_textdomain( 'mp_html_addon', $mofile_global );
 	} elseif ( file_exists( $mofile_local ) ) {
 		// Look in local /wp-content/plugins/message_bar/languages/ folder
-		load_textdomain( 'mp_html_in_post_addon', $mofile_local );
+		load_textdomain( 'mp_html_addon', $mofile_local );
 	} else {
 		// Load the default language files
-		load_plugin_textdomain( 'mp_html_in_post_addon', false, $mp_html_in_post_addon_lang_dir );
+		load_plugin_textdomain( 'mp_html_addon', false, $mp_html_addon_lang_dir );
 	}
 
 }
-add_action( 'init', 'mp_html_in_post_addon_textdomain', 1 );
+add_action( 'init', 'mp_html_addon_textdomain', 1 );
 
 /*
 |--------------------------------------------------------------------------
@@ -97,7 +97,7 @@ add_action( 'init', 'mp_html_in_post_addon_textdomain', 1 );
 |--------------------------------------------------------------------------
 */
 
-function mp_html_in_post_addon_include_files(){
+function mp_html_addon_include_files(){
 	/**
 	 * If mp_core isn't active, stop and install it now
 	 */
@@ -106,38 +106,43 @@ function mp_html_in_post_addon_include_files(){
 		/**
 		 * Include Plugin Checker
 		 */
-		require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
+		require( MP_HTML_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
 		
 		/**
 		 * Check if wp_core in installed
 		 */
-		include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-core-check.php' );
+		include_once( MP_HTML_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-core-check.php' );
 		
 	}
 	/**
-	 * If mp_core is active but mp_html_in_post isn't, stop and install it now
+	 * If mp_core is active but mp_html isn't, stop and install it now
 	 */
-	elseif(!function_exists('mp_html_in_post_textdomain')){
+	elseif(!function_exists('mp_html_textdomain')){
 		/**
 		 * Include Plugin Checker
 		 */
-		require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
+		require( MP_HTML_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
 		
 		/**
 		 * Check if wp_html_in_post in installed
 		 */
-		include_once( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-html-in-post-check.php' );
+		include_once( MP_HTML_ADDON_PLUGIN_DIR . 'includes/plugin-checker/included-plugins/mp-html-check.php' );
 	}
 	/**
-	 * Otherwise, if mp_core and mp_html_in_post are installed, carry out the plugin's functions
+	 * Otherwise, if mp_core and mp_html are installed, carry out the plugin's functions
 	 */
 	else{
+		
+		/**
+		 * Update script - keeps this plugin up to date
+		 */
+		require( MP_HTML_ADDON_PLUGIN_DIR . 'includes/updater/mp-html-addon-update.php' );
 			
 		/**
 		 * Modify Metabox for HTML repeater for posts
 		 */
-		require( MP_HTML_IN_POST_ADDON_PLUGIN_DIR . 'includes/metaboxes/html-repeater-addon/html-repeater-addon.php' );
+		require( MP_HTML_ADDON_PLUGIN_DIR . 'includes/metaboxes/html-repeater-addon/html-repeater-addon.php' );
 		
 	}
 }
-add_action('plugins_loaded', 'mp_html_in_post_addon_include_files', 9);
+add_action('plugins_loaded', 'mp_html_addon_include_files', 9);
