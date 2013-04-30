@@ -8,7 +8,7 @@
 		$args = array(
 			'software_name' => 'MP HTML In Post Addon', //<- The exact name of this Plugin. Make sure it matches the title in your mp_repo, edd, and the WP.org repo
 			'software_api_url' => 'http://moveplugins.com',//The URL where EDD and mp_repo are installed and checked
-			'software_filename' => 'mp-html-in-post-addon.php',
+			'software_filename' => 'mp-html-addon.php',
 			'software_licenced' => false, //<-Boolean
 		);
 		
