@@ -106,7 +106,7 @@ function mp_html_addon_include_files(){
 		/**
 		 * Include Plugin Checker
 		 */
-		require( MP_HTML_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
+		require( MP_HTML_ADDON_PLUGIN_DIR . 'includes/plugin-checker/class-plugin-checker.php' );
 		
 		/**
 		 * Check if wp_core in installed
@@ -121,7 +121,7 @@ function mp_html_addon_include_files(){
 		/**
 		 * Include Plugin Checker
 		 */
-		require( MP_HTML_ADDON_PLUGIN_DIR . 'includes/plugin-checker/plugin-checker.php' );
+		require( MP_HTML_ADDON_PLUGIN_DIR . 'includes/plugin-checker/class-plugin-checker.php' );
 		
 		/**
 		 * Check if wp_html_in_post in installed
