@@ -10,7 +10,7 @@ function mp_html_theme_updater() {
 		'plugin_slug' => 'mp_html', 
 		'plugin_filename' => 'mp-html.php',
 		'plugin_required' => true,
-		'plugin_download_link' => 'http://moveplugins.com/repo/mp-html-in-post/?download=true'
+		'plugin_download_link' => 'http://repo.moveplugins.com/repo/mp-html-in-post/?downloadfile=true'
 	);
 	$mp_core_theme_updater = new MP_CORE_Plugin_Checker($args);
 }
